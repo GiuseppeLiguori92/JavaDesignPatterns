@@ -1,4 +1,4 @@
-package com.giuseppeliguori.tolearn.labda;
+package com.giuseppeliguori.tolearn.lambda;
 
 /**
  * Created by giuseppeliguori on 04/05/2017.
