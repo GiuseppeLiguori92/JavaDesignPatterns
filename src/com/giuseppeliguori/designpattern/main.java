@@ -1,5 +1,6 @@
 package com.giuseppeliguori.designpattern;
 
+import com.giuseppeliguori.designpattern.creational.factory.*;
 import com.giuseppeliguori.designpattern.creational.singleton.Item;
 import com.giuseppeliguori.designpattern.creational.singleton.StorageSingleton;
 import com.giuseppeliguori.designpattern.creational.abstractfactory.*;
@@ -9,8 +10,6 @@ import com.giuseppeliguori.designpattern.creational.abstractfactory.car.Car;
 import com.giuseppeliguori.designpattern.creational.abstractfactory.CarFactory;
 import com.giuseppeliguori.designpattern.creational.builder.Person;
 import com.giuseppeliguori.designpattern.creational.builder.PersonBuilder;
-import com.giuseppeliguori.designpattern.creational.factory.Shape;
-import com.giuseppeliguori.designpattern.creational.factory.ShapeFactory;
 import com.giuseppeliguori.designpattern.creational.prototype.Computer;
 import com.giuseppeliguori.designpattern.creational.prototype.ComputerCache;
 import com.giuseppeliguori.designpattern.structural.adapter.DataAdapter;
@@ -31,6 +30,8 @@ public class main {
         builder();
 
         factory();
+
+        factoryMethod();
 
         abstractFactory();
 
@@ -208,6 +209,28 @@ public class main {
                 .build();
 
         System.out.println(person2.toString());
+    }
+
+    private static void factoryMethod() {
+        System.out.println("\n\n**FactoryMethod");
+        // Get the input from someone
+        ShapeFactory.ShapeType input = ShapeFactory.ShapeType.CIRCLE;
+        Shape shape = getShape(input);
+        shape.setRadius(10);
+        shape.getArea();
+    }
+
+    private static Shape getShape(ShapeFactory.ShapeType type) {
+        switch (type) {
+            case CIRCLE:
+                return new Circle();
+            case SQUARE:
+                return new Square();
+            case RECTANGLE:
+                return new Rectangle();
+            default:
+                return null;
+        }
     }
 
     private static void factory() {
