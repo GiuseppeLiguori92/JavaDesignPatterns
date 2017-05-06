@@ -15,6 +15,7 @@ import com.giuseppeliguori.designpattern.creational.prototype.Computer;
 import com.giuseppeliguori.designpattern.creational.prototype.ComputerCache;
 import com.giuseppeliguori.designpattern.structural.adapter.DataAdapter;
 import com.giuseppeliguori.designpattern.structural.adapter.DataPresenter;
+import com.giuseppeliguori.designpattern.structural.bridge.*;
 
 import java.util.*;
 
@@ -37,14 +38,39 @@ public class main {
 
         prototype();
 
-
         // TODO **Structural**
 
         adapter();
+
+        bridge();
+
+    }
+
+    private static void bridge() {
+        System.out.println("\n\n**Bridge");
+
+        Device television = new Television(Device.DeviceState.OFF);
+
+        Remote samsungRemote = new RemoteSamsungTelevision(television);
+        samsungRemote.buttonUpPressed();
+        samsungRemote.buttonDownPressed();
+        samsungRemote.buttonBluePressed();
+
+        Remote sonyRemote = new RemoteSamsungTelevision(television);
+        sonyRemote.buttonUpPressed();
+        sonyRemote.buttonDownPressed();
+        sonyRemote.buttonBluePressed();
+
+        Device gate = new Gate(Device.DeviceState.OFF);
+
+        Remote remoteGateOne = new RemoteGateOne(gate);
+        remoteGateOne.buttonBluePressed();
+
+        Remote remoteGateTwo = new RemoteGateTwo(gate);
+        remoteGateTwo.buttonBluePressed();
     }
 
     private static void adapter() {
-
         System.out.println("\n\n**Adapter");
         // Create data list
         HashMap<Integer, Object> data = new HashMap<>();
