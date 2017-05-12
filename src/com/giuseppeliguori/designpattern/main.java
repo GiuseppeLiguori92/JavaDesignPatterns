@@ -240,10 +240,10 @@ public class main {
         circle.setRadius(20);
         System.out.println(circle.getArea());
         Shape square = shapeFactory.getShape(ShapeFactory.ShapeType.SQUARE);
-        square.setLenght(50);
+        square.setLength(50);
         System.out.println(square.getArea());
         Shape rectangle = shapeFactory.getShape(ShapeFactory.ShapeType.RECTANGLE);
-        rectangle.setLenght(10);
+        rectangle.setLength(10);
         rectangle.setHeight(20);
         System.out.println(rectangle.getArea());
     }

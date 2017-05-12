@@ -23,7 +23,7 @@ public class Circle implements Shape {
     }
 
     @Override
-    public void setLenght(int l) {}
+    public void setLength(int l) {}
 
     @Override
     public void setHeight(int h) {}

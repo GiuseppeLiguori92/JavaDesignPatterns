@@ -5,7 +5,7 @@ package com.giuseppeliguori.designpattern.creational.factory;
  */
 public interface Shape {
     int getArea();
-    void setLenght(int l);
+    void setLength(int l);
     void setHeight(int h);
     void setRadius(int r);
 }

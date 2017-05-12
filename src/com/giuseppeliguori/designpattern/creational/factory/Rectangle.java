@@ -33,7 +33,7 @@ public class Rectangle implements Shape {
     }
 
     @Override
-    public void setLenght(int l) {
+    public void setLength(int l) {
         setL(l);
     }
 
