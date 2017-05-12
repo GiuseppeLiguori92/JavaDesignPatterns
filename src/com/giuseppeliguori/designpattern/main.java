@@ -15,6 +15,8 @@ import com.giuseppeliguori.designpattern.creational.prototype.ComputerCache;
 import com.giuseppeliguori.designpattern.structural.adapter.DataAdapter;
 import com.giuseppeliguori.designpattern.structural.adapter.DataPresenter;
 import com.giuseppeliguori.designpattern.structural.bridge.*;
+import com.giuseppeliguori.designpattern.structural.composite.Meal;
+import com.giuseppeliguori.designpattern.structural.composite.Product;
 
 import java.util.*;
 
@@ -44,6 +46,23 @@ public class main {
         adapter();
 
         bridge();
+
+        composite();
+
+    }
+
+    private static void composite() {
+        System.out.println("\n\n**Composite");
+        Product hamburger = new Product("Hamburger", Product.Type.FOOD, 5.99f);
+        Product pepsi = new Product("Pepsi", Product.Type.DRINK, 1.49f);
+        Product icecream = new Product("Ice Cream", Product.Type.FOOD, 0.99f);
+        Meal meal = new Meal();
+        meal.addProduct(hamburger);
+        meal.addProduct(pepsi);
+        meal.addProduct(icecream);
+
+        System.out.println(meal.toString());
+        System.out.println(String.format("Meal price: $%.02f",meal.getPrice()));
 
     }
 
