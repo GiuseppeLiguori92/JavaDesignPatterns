@@ -1,6 +1,10 @@
 package com.giuseppeliguori.designpattern;
 
-import com.giuseppeliguori.designpattern.creational.factory.*;
+import com.giuseppeliguori.designpattern.creational.factory.Circle;
+import com.giuseppeliguori.designpattern.creational.factory.Rectangle;
+import com.giuseppeliguori.designpattern.creational.factory.Shape;
+import com.giuseppeliguori.designpattern.creational.factory.ShapeFactory;
+import com.giuseppeliguori.designpattern.creational.factory.Square;
 import com.giuseppeliguori.designpattern.creational.singleton.Item;
 import com.giuseppeliguori.designpattern.creational.singleton.StorageSingleton;
 import com.giuseppeliguori.designpattern.creational.abstractfactory.*;
@@ -19,6 +23,9 @@ import com.giuseppeliguori.designpattern.structural.composite.Meal;
 import com.giuseppeliguori.designpattern.structural.composite.Product;
 import com.giuseppeliguori.designpattern.structural.facade.ShapeDrawer;
 
+import java.awt.*;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryUsage;
 import java.util.*;
 
 /**
@@ -28,30 +35,69 @@ public class main {
     public static void main(String[] args) {
         System.out.println("Hello world design patterns!");
 
-        // TODO **Creational**
+//        // TODO **Creational**
+//
+//        builder();
+//
+//        factory();
+//
+//        factoryMethod();
+//
+//        abstractFactory();
+//
+//        signleton();
+//
+//        prototype();
+//
+//        // TODO **Structural**
+//
+//        adapter();
+//
+//        bridge();
+//
+//        composite();
+//
+//        facade();
+        
+        flyweight();
+        
+        
 
-        builder();
+    }
 
-        factory();
+    /**
+     * Flyweight design pattern is used when we need to create a lot of Objects of a class.
+     * Since every object consumes memory space that can be crucial for low memory devices,
+     * such as mobile devices or embedded systems, flyweight design pattern can be applied
+     * to reduce the load on memory by sharing objects.
+     */
+    private static void flyweight() {
+        long now = System.currentTimeMillis();
+        com.giuseppeliguori.designpattern.structural.flyweight.ShapeFactory shapeFactory = new com.giuseppeliguori.designpattern.structural.flyweight.ShapeFactory();
 
-        factoryMethod();
+        // Create a loooooot of shapes, you can see the results if you follow the _TODO in the Shapefactory class
+        Random random = new Random(3);
+        com.giuseppeliguori.designpattern.structural.flyweight.ShapeFactory.ShapeType type = null;
+        int randomType = -1;
+        for (int i = 0; i < 1000000; i++) {
+            randomType = random.nextInt(3);
+            switch (randomType) {
+                case 0:
+                    type = com.giuseppeliguori.designpattern.structural.flyweight.ShapeFactory.ShapeType.CIRCLE;
+                    break;
+                case 1:
+                    type = com.giuseppeliguori.designpattern.structural.flyweight.ShapeFactory.ShapeType.SQUARE;
+                    break;
+                case 2:
+                    type = com.giuseppeliguori.designpattern.structural.flyweight.ShapeFactory.ShapeType.RECTANGLE;
+                    break;
+            }
 
-        abstractFactory();
-
-        signleton();
-
-        prototype();
-
-        // TODO **Structural**
-
-        adapter();
-
-        bridge();
-
-        composite();
-
-        facade();
-
+            com.giuseppeliguori.designpattern.structural.flyweight.Shape shape = shapeFactory.getShape(type);
+            shape.setColor(Color.BLUE);
+            shape.setCoordinate(new Point(random.nextInt(1280), random.nextInt(800)));
+            shape.setDimension(random.nextInt(30), random.nextInt(60));
+        }
     }
 
     /**
