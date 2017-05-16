@@ -17,6 +17,7 @@ import com.giuseppeliguori.designpattern.structural.adapter.DataPresenter;
 import com.giuseppeliguori.designpattern.structural.bridge.*;
 import com.giuseppeliguori.designpattern.structural.composite.Meal;
 import com.giuseppeliguori.designpattern.structural.composite.Product;
+import com.giuseppeliguori.designpattern.structural.facade.ShapeDrawer;
 
 import java.util.*;
 
@@ -49,6 +50,23 @@ public class main {
 
         composite();
 
+        facade();
+
+    }
+
+    /**
+     * Facade pattern hides the complexities of the system and provides an interface to the client
+     * using which the client can access the system.
+     * This type of design pattern comes under structural pattern as this pattern adds an interface
+     * to existing system to hide its complexities.
+     * This pattern involves a single class which provides simplified methods required by client
+     * and delegates calls to methods of existing system classes
+     */
+    private static void facade() {
+        ShapeDrawer shapeDrawer = new ShapeDrawer();
+        shapeDrawer.drawCircle();
+        shapeDrawer.drawRectangle();
+        shapeDrawer.drawSquare();
     }
 
     private static void composite() {
