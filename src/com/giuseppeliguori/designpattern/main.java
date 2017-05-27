@@ -17,6 +17,11 @@ import com.giuseppeliguori.designpattern.structural.adapter.DataPresenter;
 import com.giuseppeliguori.designpattern.structural.bridge.*;
 import com.giuseppeliguori.designpattern.structural.composite.Meal;
 import com.giuseppeliguori.designpattern.structural.composite.Product;
+import com.giuseppeliguori.designpattern.structural.decorator.AppleCake;
+import com.giuseppeliguori.designpattern.structural.decorator.BasicCake;
+import com.giuseppeliguori.designpattern.structural.decorator.Cake;
+import com.giuseppeliguori.designpattern.structural.decorator.CheeseCake;
+import com.giuseppeliguori.designpattern.structural.proxy.User;
 
 import java.util.*;
 
@@ -27,28 +32,58 @@ public class main {
     public static void main(String[] args) {
         System.out.println("Hello world design patterns!");
 
-        // TODO **Creational**
+//        // TODO **Creational**
+//
+//        builder();
+//
+//        factory();
+//
+//        factoryMethod();
+//
+//        abstractFactory();
+//
+//        signleton();
+//
+//        prototype();
+//
+//        // TODO **Structural**
+//
+//        adapter();
+//
+//        bridge();
+//
+//        composite();
 
-        builder();
+//        decorator();
 
-        factory();
+        proxy();
 
-        factoryMethod();
+    }
 
-        abstractFactory();
+    private static void proxy() {
+        User user = new User("Giuseppe", "249710974");
+        user.accessToPrivateRoom();
+        user.accessToPublicRoom();
 
-        signleton();
+        User user2 = new User("Hannah", "01201284darqweqwca");
+        user2.accessToPrivateRoom();
+        user2.accessToPublicRoom();
 
-        prototype();
+        User user3 = new User("Alfred", "01249043c6135v1215");
+        user3.accessToPrivateRoom();
+        user3.accessToPublicRoom();
 
-        // TODO **Structural**
 
-        adapter();
+    }
 
-        bridge();
+    private static void decorator() {
+        System.out.println("\n\n**Decorator");
 
-        composite();
+        Cake appleCake = new AppleCake(new BasicCake());
+        appleCake.make();
 
+        Cake cheeseCake = new CheeseCake(new BasicCake());
+        cheeseCake.make();
     }
 
     private static void composite() {
