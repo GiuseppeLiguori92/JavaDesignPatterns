@@ -1,6 +1,13 @@
 package com.giuseppeliguori.designpattern;
 
-import com.giuseppeliguori.designpattern.creational.factory.*;
+import com.giuseppeliguori.designpattern.behavioral.template.ConcreteHouse;
+import com.giuseppeliguori.designpattern.behavioral.template.HouseTemplate;
+import com.giuseppeliguori.designpattern.behavioral.template.WoodenHouse;
+import com.giuseppeliguori.designpattern.creational.factory.Circle;
+import com.giuseppeliguori.designpattern.creational.factory.Rectangle;
+import com.giuseppeliguori.designpattern.creational.factory.Shape;
+import com.giuseppeliguori.designpattern.creational.factory.ShapeFactory;
+import com.giuseppeliguori.designpattern.creational.factory.Square;
 import com.giuseppeliguori.designpattern.creational.singleton.Item;
 import com.giuseppeliguori.designpattern.creational.singleton.StorageSingleton;
 import com.giuseppeliguori.designpattern.creational.abstractfactory.*;
@@ -22,7 +29,9 @@ import com.giuseppeliguori.designpattern.structural.decorator.BasicCake;
 import com.giuseppeliguori.designpattern.structural.decorator.Cake;
 import com.giuseppeliguori.designpattern.structural.decorator.CheeseCake;
 import com.giuseppeliguori.designpattern.structural.proxy.User;
+import com.giuseppeliguori.designpattern.structural.facade.ShapeDrawer;
 
+import java.awt.*;
 import java.util.*;
 
 /**
@@ -32,35 +41,65 @@ public class main {
     public static void main(String[] args) {
         System.out.println("Hello world design patterns!");
 
-//        // TODO **Creational**
-//
-//        builder();
-//
-//        factory();
-//
-//        factoryMethod();
-//
-//        abstractFactory();
-//
-//        signleton();
-//
-//        prototype();
-//
-//        // TODO **Structural**
-//
-//        adapter();
-//
-//        bridge();
-//
-//        composite();
+        /**
+         * Creational
+         */
 
-//        decorator();
+        abstractFactory();
+
+        builder();
+
+        factory();
+
+        factoryMethod();
+
+        prototype();
+
+        signleton();
+
+        /**
+         * Structural
+         */
+
+        adapter();
+
+        bridge();
+
+        composite();
+
+        decorator();
+
+        facade();
+
+        flyweight();
 
         proxy();
+
+        /**
+         * Behavioral
+         */
+
+        template();
+    }
+
+    /**
+     * Template method defines the steps to execute an algorithm and it can provide default
+     * implementation that might be common for all or some of the subclasses.
+     */
+    private static void template() {
+        System.out.println("\n\n**Template");
+        // We are going to build 2 different houses but with the
+        // same algorithm to build it
+        HouseTemplate woodenHouse = new WoodenHouse();
+        woodenHouse.buildHouse();
+
+        HouseTemplate concreteHouse = new ConcreteHouse();
+        concreteHouse.buildHouse();
 
     }
 
     private static void proxy() {
+        System.out.println("\n\n**Proxy");
         User user = new User("Giuseppe", "249710974");
         user.accessToPrivateRoom();
         user.accessToPublicRoom();
@@ -72,8 +111,6 @@ public class main {
         User user3 = new User("Alfred", "01249043c6135v1215");
         user3.accessToPrivateRoom();
         user3.accessToPublicRoom();
-
-
     }
 
     private static void decorator() {
@@ -84,6 +121,56 @@ public class main {
 
         Cake cheeseCake = new CheeseCake(new BasicCake());
         cheeseCake.make();
+    }
+
+    /**
+     * Flyweight design pattern is used when we need to create a lot of Objects of a class.
+     * Since every object consumes memory space that can be crucial for low memory devices,
+     * such as mobile devices or embedded systems, flyweight design pattern can be applied
+     * to reduce the load on memory by sharing objects.
+     */
+    private static void flyweight() {
+        long now = System.currentTimeMillis();
+        com.giuseppeliguori.designpattern.structural.flyweight.ShapeFactory shapeFactory = new com.giuseppeliguori.designpattern.structural.flyweight.ShapeFactory();
+
+        // Create a loooooot of shapes, you can see the results if you follow the _TODO in the Shapefactory class
+        Random random = new Random(3);
+        com.giuseppeliguori.designpattern.structural.flyweight.ShapeFactory.ShapeType type = null;
+        int randomType = -1;
+        for (int i = 0; i < 1000000; i++) {
+            randomType = random.nextInt(3);
+            switch (randomType) {
+                case 0:
+                    type = com.giuseppeliguori.designpattern.structural.flyweight.ShapeFactory.ShapeType.CIRCLE;
+                    break;
+                case 1:
+                    type = com.giuseppeliguori.designpattern.structural.flyweight.ShapeFactory.ShapeType.SQUARE;
+                    break;
+                case 2:
+                    type = com.giuseppeliguori.designpattern.structural.flyweight.ShapeFactory.ShapeType.RECTANGLE;
+                    break;
+            }
+
+            com.giuseppeliguori.designpattern.structural.flyweight.Shape shape = shapeFactory.getShape(type);
+            shape.setColor(Color.BLUE);
+            shape.setCoordinate(new Point(random.nextInt(1280), random.nextInt(800)));
+            shape.setDimension(random.nextInt(30), random.nextInt(60));
+        }
+    }
+
+    /**
+     * Facade pattern hides the complexities of the system and provides an interface to the client
+     * using which the client can access the system.
+     * This type of design pattern comes under structural pattern as this pattern adds an interface
+     * to existing system to hide its complexities.
+     * This pattern involves a single class which provides simplified methods required by client
+     * and delegates calls to methods of existing system classes
+     */
+    private static void facade() {
+        ShapeDrawer shapeDrawer = new ShapeDrawer();
+        shapeDrawer.drawCircle();
+        shapeDrawer.drawRectangle();
+        shapeDrawer.drawSquare();
     }
 
     private static void composite() {
@@ -194,7 +281,6 @@ public class main {
                 System.out.println(computerCache.toString());
             }
         });
-
     }
 
     private static void doLongOperation(OnLongOperationEventListener onLongOperationEventListener) {
