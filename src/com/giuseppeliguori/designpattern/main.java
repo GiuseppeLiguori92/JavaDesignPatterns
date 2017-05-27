@@ -80,6 +80,20 @@ public class main {
          */
 
         template();
+
+        mediator();
+    }
+
+
+    // Mediator pattern is used to reduce communication complexity between multiple objects or classes.
+    // This pattern provides a mediator class which normally handles all the communications
+    // between different classes and supports easy maintenance of the code by loose coupling.
+    private static void mediator() {
+        com.giuseppeliguori.designpattern.behavioral.mediator.User giuseppe = new com.giuseppeliguori.designpattern.behavioral.mediator.User("Giuseppe L.", 213);
+        com.giuseppeliguori.designpattern.behavioral.mediator.User sara = new com.giuseppeliguori.designpattern.behavioral.mediator.User("Sara C.", 213);
+
+        giuseppe.sendMessage(sara, "I love you <3");
+        sara.sendMessage(giuseppe, "Me too, so much!");
     }
 
     /**
