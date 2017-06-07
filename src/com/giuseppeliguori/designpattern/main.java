@@ -1,5 +1,10 @@
 package com.giuseppeliguori.designpattern;
 
+import com.giuseppeliguori.designpattern.behavioral.chainofresponsibility.Boss;
+import com.giuseppeliguori.designpattern.behavioral.chainofresponsibility.Manager;
+import com.giuseppeliguori.designpattern.behavioral.observer.Book;
+import com.giuseppeliguori.designpattern.behavioral.observer.Library;
+import com.giuseppeliguori.designpattern.behavioral.observer.LibraryObserver;
 import com.giuseppeliguori.designpattern.behavioral.template.ConcreteHouse;
 import com.giuseppeliguori.designpattern.behavioral.template.HouseTemplate;
 import com.giuseppeliguori.designpattern.behavioral.template.WoodenHouse;
@@ -82,8 +87,69 @@ public class main {
         template();
 
         mediator();
+
+        observer();
+
+        chainofresponsibility();
     }
 
+    private static void chainofresponsibility() {;
+        Boss boss = new Boss(null);
+        Manager manager = new Manager(boss);
+
+        manager.processRequest(com.giuseppeliguori.designpattern.behavioral.chainofresponsibility.Person.Request.INTERVIEW_NEW_CANDIDATE);
+        manager.processRequest(com.giuseppeliguori.designpattern.behavioral.chainofresponsibility.Person.Request.FIRE);
+        boss.processRequest(com.giuseppeliguori.designpattern.behavioral.chainofresponsibility.Person.Request.INTERVIEW_NEW_CANDIDATE);
+        boss.processRequest(com.giuseppeliguori.designpattern.behavioral.chainofresponsibility.Person.Request.FIRE);
+
+    }
+
+    private static void observer() {
+        Book book1 = new Book("Here we are!", 4214);
+        Book book2 = new Book("48 hours to escape", 5451);
+        Book book3 = new Book("Nothing is all", 1235);
+        Book book4 = new Book("Let's discover the world", 9241);
+
+        Library library = new Library();
+        library.addObserver(new LibraryObserver() {
+            @Override
+            public void onBookBorrowed(Book book) {
+                System.out.println("main.onBookBorrowed: " + book.getTitle());
+            }
+
+            @Override
+            public void onBookNotAvailable(Book book) {
+                System.out.println("main.onBookNotAvailable: " + book.getTitle());
+            }
+
+            @Override
+            public void onBookReturned(Book book) {
+                System.out.println("main.onBookReturned: " + book.getTitle());
+            }
+
+            @Override
+            public void onBookAdded(Book book) {
+                System.out.println("main.onBookAdded: " + book.getTitle());
+            }
+        });
+
+        // Add books to the library
+        library.addBook(book1);
+        library.addBook(book2);
+        library.addBook(book3);
+
+        // Borrow a book
+        library.borrowBook(book2);
+
+        // Borrow another book, unfortunately this book has already been borrowed
+        library.borrowBook(book2);
+
+        // Add book
+        library.addBook(book4);
+
+        // Return book
+        library.returnBook(book2);
+    }
 
     // Mediator pattern is used to reduce communication complexity between multiple objects or classes.
     // This pattern provides a mediator class which normally handles all the communications
