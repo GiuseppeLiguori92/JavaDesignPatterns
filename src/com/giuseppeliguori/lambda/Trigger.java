@@ -18,7 +18,6 @@ public class Trigger {
     }
 
     public Trigger() {
-
         new Thread( () -> {
             while (true) {
                 try {

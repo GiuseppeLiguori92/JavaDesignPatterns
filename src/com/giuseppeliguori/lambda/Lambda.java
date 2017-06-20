@@ -5,7 +5,6 @@ package com.giuseppeliguori.lambda;
  */
 public class Lambda {
     public Lambda() {
-
         Trigger trigger = new Trigger();;
         trigger.setOnStateChangeListener( (newState -> System.out.println(newState.toString())) );
     }
