@@ -1,5 +1,6 @@
 package com.giuseppeliguori.designpattern;
 
+import com.giuseppeliguori.designpattern.behavioral.Strategy.*;
 import com.giuseppeliguori.designpattern.behavioral.chainofresponsibility.Boss;
 import com.giuseppeliguori.designpattern.behavioral.chainofresponsibility.Manager;
 import com.giuseppeliguori.designpattern.behavioral.observer.Book;
@@ -91,6 +92,30 @@ public class main {
         observer();
 
         chainofresponsibility();
+
+        strategy();
+    }
+
+    private static void strategy() {
+        com.giuseppeliguori.designpattern.behavioral.Strategy.Item pasta = new com.giuseppeliguori.designpattern.behavioral.Strategy.Item("Pasta", 3.45f);
+        com.giuseppeliguori.designpattern.behavioral.Strategy.Item wine = new com.giuseppeliguori.designpattern.behavioral.Strategy.Item("Wine", 7.99f);
+        com.giuseppeliguori.designpattern.behavioral.Strategy.Item tomatoes = new com.giuseppeliguori.designpattern.behavioral.Strategy.Item("Tomatoes", 1.70f);
+        com.giuseppeliguori.designpattern.behavioral.Strategy.Item parmesan = new com.giuseppeliguori.designpattern.behavioral.Strategy.Item("Parmesan", 0.99f);
+
+        Cart cart = new Cart();
+        cart.addItem(pasta);
+        cart.addItem(wine);
+        cart.addItem(tomatoes);
+        cart.addItem(parmesan);
+
+        PaymentMethod paymentMethod = new Cash();
+        cart.pay(paymentMethod);
+
+        PaymentMethod paymentMethod2 = new Card();
+        cart.pay(paymentMethod2);
+
+        PaymentMethod paymentMethod3 = new Paypal();
+        cart.pay(paymentMethod3);
     }
 
     private static void chainofresponsibility() {;
