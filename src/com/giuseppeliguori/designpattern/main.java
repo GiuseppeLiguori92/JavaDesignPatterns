@@ -424,9 +424,9 @@ public class main {
         Car suvCar = carFactory.getCar(CarFactory.CarType.SUV);
         suvCar.refill();
         suvCar.drive();
-        Car spiderCar = carFactory.getCar(CarFactory.CarType.SPIDER);
-        spiderCar.refill();
-        spiderCar.drive();
+        Car convertibleCar = carFactory.getCar(CarFactory.CarType.CONVERTIBLE);
+        convertibleCar.refill();
+        convertibleCar.drive();
 
         VehicleFactory bikeFactory = factoryProducer.getVehicleFactory(FactoryProducer.VehicleType.BIKE);
         Bike roadBike = bikeFactory.getBike(BikeFactory.BikeType.ROAD);

@@ -2,7 +2,7 @@ package com.giuseppeliguori.designpattern.creational.abstractfactory;
 
 import com.giuseppeliguori.designpattern.creational.abstractfactory.bike.Bike;
 import com.giuseppeliguori.designpattern.creational.abstractfactory.car.Car;
-import com.giuseppeliguori.designpattern.creational.abstractfactory.car.SpiderCar;
+import com.giuseppeliguori.designpattern.creational.abstractfactory.car.ConvertibleCar;
 import com.giuseppeliguori.designpattern.creational.abstractfactory.car.SuvCar;
 
 /**
@@ -12,7 +12,7 @@ public class CarFactory implements VehicleFactory {
 
     public enum CarType {
         SUV,
-        SPIDER
+        CONVERTIBLE
     }
 
     @Override
@@ -23,8 +23,8 @@ public class CarFactory implements VehicleFactory {
     @Override
     public Car getCar(CarType carType) {
         switch (carType) {
-            case SPIDER:
-                return new SpiderCar();
+            case CONVERTIBLE:
+                return new ConvertibleCar();
             case SUV:
                 return new SuvCar();
             default:
